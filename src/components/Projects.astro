@@ -3,6 +3,8 @@ import WebIcon from "./icons/Web.astro";
 import NextJSIcon from "./icons/NextJS.astro";
 import TailwindIcon from "./icons/Tailwind.astro";
 import AstroIcon from "./icons/AstroIcon.astro";
+import FirebaseIcon from "./icons/Firebase.astro";
+import HygraphIcon from "./icons/Hygraph.astro";
 
 const TAGS = {
   NEXT: {
@@ -20,6 +22,16 @@ const TAGS = {
     class: "bg-black text-white",
     icon: AstroIcon,
   },
+  FIREBASE: {
+    name: "Firebase",
+    class: "bg-white text-black",
+    icon: FirebaseIcon,
+  },
+  HYGRAPH: {
+    name: "Hygraph",
+    class: "bg-black text-white",
+    icon: HygraphIcon,
+  },
 };
 const PROJECTS = [
   {
@@ -30,6 +42,7 @@ const PROJECTS = [
     github: "https://github.com/pheralb/svgl",
     image: "/projects/33dc.webp",
     tags: [TAGS.ASTRO, TAGS.TAILWIND],
+    isPublic: false,
   },
   {
     title: "Roommie",
@@ -39,6 +52,7 @@ const PROJECTS = [
     github: "https://github.com/pheralb/svgl",
     image: "/projects/roomie.webp",
     tags: [TAGS.ASTRO, TAGS.TAILWIND],
+    isPublic: false,
   },
   {
     title: "Dr Juan Pablo Molina - Experto en Salud Mamaria",
@@ -47,7 +61,8 @@ const PROJECTS = [
     link: "https://dr-juan-pablo-molina.vercel.app/",
     github: "https://github.com/pheralb/svgl",
     image: "/projects/dr-molina.webp",
-    tags: [TAGS.NEXT, TAGS.TAILWIND],
+    tags: [TAGS.NEXT, TAGS.TAILWIND, TAGS.HYGRAPH],
+    isPublic: false,
   },
   {
     title: "Test - Con Los Crespos Hechos",
@@ -56,19 +71,20 @@ const PROJECTS = [
     link: "https://test.conloscresposhechos.com.co/",
     github: "https://github.com/pheralb/svgl",
     image: "/projects/gaviranda.webp",
-    tags: [TAGS.ASTRO, TAGS.TAILWIND],
+    tags: [TAGS.NEXT, TAGS.TAILWIND, TAGS.FIREBASE],
+    isPublic: false,
   },
 ];
 ---
 
 {
-  PROJECTS.map(({ image, link, title, description, tags }) => (
+  PROJECTS.map(({ image, link, title, description, tags, isPublic }) => (
     <article>
       <h3 class="text-2xl font-semibold text-yellow-200 mb-2">{title}</h3>
       <p class="text-lg mb-4 text-pretty">{description}</p>
-      <ul class="flex gap-x-2 flex-row mb-2">
+      <ul class="flex gap-x-2 flex-row pb-2 mb-1 w-full overflow-x-auto">
         {tags.map((tag) => (
-          <li>
+          <li class="text-nowrap">
             <span
               class={`flex items-center justify-center gap-x-2 rounded-full text-xs ${tag.class} py-1 px-2`}
             >
@@ -81,9 +97,14 @@ const PROJECTS = [
       <div class="rounded group shadow-2xl shadow-white/10 aspect-video overflow-clip relative">
         <div class="w-full h-full flex flex-col justify-center items-center bg-black/70 absolute top-0 z-10 left-0 opacity-0 group-hover:opacity-100 transition text-white/75">
           <a href={link} target="_blank" rel="noopener noreferrer">
-            <WebIcon class="size-20 cursor-pointer hover:text-sky-200 hover:scale-110 transition" />
+            <WebIcon class="size-10 lg:size-20 cursor-pointer hover:text-sky-200 hover:scale-110 transition" />
           </a>
         </div>
+        {!isPublic && (
+          <div class="rounded opacity-0 group-hover:opacity-100 bg-red-500 text-xs absolute right-1 top-1 z-20 p-2 transition">
+            Proyecto empresarial
+          </div>
+        )}
         <img
           loading="lazy"
           class="z-0 relative"
